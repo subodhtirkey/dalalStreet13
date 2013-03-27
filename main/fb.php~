@@ -1,0 +1,91 @@
+ <?php 
+ 
+  $appid = "263593520331172";
+  $appsecret = 'f375faf3a72816923278d367798ce2aa';
+  $canvas_page = "http://delta.nitt.edu/~steve/fb.php";
+  require 'fb/facebook.php';
+  $facebook = new Facebook(array(
+				'appId'  => '263593520331172',
+				'secret' => 'f375faf3a72816923278d367798ce2aa',
+				)); 
+
+
+
+
+
+
+
+
+
+function loginUserFb()
+{
+  global $facebook;
+  if(!$facebook->getUser()) header("Location:".$facebook->getLoginUrl(array(
+									    'scope' => 'publish_stream'
+									    )));
+}
+function logoutUserFb()
+{
+} 
+
+
+
+if ($facebook->getUser())
+  {
+    try
+      {
+       $me = $facebook->api('/me');
+       //          $facebook->destroySession();
+
+      }
+    catch(FacebookApiException $e){
+       $facebook->destroySession();
+				}
+  }
+
+loginUserFb();
+print_r($facebook);
+if(!isset($_GET['state']))
+{
+    $facebook->api('/me/festember:play', 'post', 		
+		 array( 
+	       'play'=>  'http://delta.nitt.edu/~steve/fb.html' ));
+  
+	       }
+
+
+
+
+
+  if(!isset($_GET['state'])){
+try {
+  $ret_obj = $facebook->api('/me/feed', 'POST',
+			    array(
+         			  'link' => 'delta.nitt.edu/~steve/fb.html',
+                                  'message' => 'festember2012'
+				  ));
+  echo '<pre>Post ID: ' . $ret_obj['id'] . '</pre>';
+   header("Location:fb.html");
+} catch(FacebookApiException $e) {
+  // If the user is logged out, you can have a 
+  // user ID even though the access token is invalid.
+  // In this case, we'll get an exception, so we'll
+  // just ask the user to login again here.
+  $login_url = $facebook->getLoginUrl( array(
+                       'scope' => 'publish_stream'
+					     )); 
+  echo 'Please <a href="' . $login_url . '">login.</a>';
+  error_log($e->getType());
+  error_log($e->getMessage());
+
+  } 
+
+}
+
+// Give the user a logout link 
+echo '<br /><a href="' . $facebook->getLogoutUrl() . '">logout</a>';
+//if($facebook->getUser()=='') header("Location:".$facebook->getLoginUrl());
+//  echo "<a href='" .$facebook->getLoginUrl(). "' > Login</a>";
+echo $facebook->getUser(); 
+//header("Location:".$facebook->getLogoutUrl());// $facebook->getLogoutUrl();
+ ?>

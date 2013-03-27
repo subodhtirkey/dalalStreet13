@@ -1,0 +1,72 @@
+/*******_________________________Dalalstreet 2013_________________________________________****/
+/*for changing the contains of the div having id=middlecontaints*/
+
+///////////////market/////
+var market='
+
+<div class="alert alert-info">
+          <b>Updates</b>
+        </div>
+        <div class="well">
+          <div class="alert alert-success">
+            <b>Market</b>
+          </div>
+          <img src="http://placehold.it/100x100" class="img-rounded" width="90">
+          <form class="form-horizontal">
+            <div class="control-group">
+              <label class="control-label" for="buyshares">Buy Shares</label>
+              <div class="controls">
+                <input type="text" id="buyshares" placeholder="Shares"> 
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <button type="submit" class="btn">Buy</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="well">
+          <div class="alert alert-success">
+            <b>Statistics</b>
+          </div>
+        </div>
+        <div class="well">
+          <div class="alert alert-success">
+            <b>Leaderboard</b>
+          </div>
+          <table class="table table-striped table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>First Name</th>
+                <th>NetWorth</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Michael</td>
+                <td>$1000</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jake</td>
+                <td>$500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+';
+
+function changecontents()
+{
+
+
+var element=document.getElementById("middlecontains");
+element.innerHTML="New Header";
+}
+
+
+
